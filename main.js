@@ -3,8 +3,8 @@
    und als interaktive 3D-Punktwolke darstellen. Reines WebGL. */
 
 (function () {
-  const DATA_URL = "data/seeds.csv";            // Originaldaten (7 Merkmale + Klasse)
-  const SAVED_URL = "data/seeds_tsne3d.csv";    // gespeicherte, beste t-SNE-Lösung (3D)
+  const DATA_URL = "seeds.csv";            // Originaldaten (7 Merkmale + Klasse)
+  const SAVED_URL = "seeds_tsne3d.csv";    // gespeicherte, beste t-SNE-Lösung (3D)
   const CLASS_NAMES = { 1: "Kama", 2: "Rosa", 3: "Canadian" };
   const CLASS_COLORS = { 1: [0.90, 0.62, 0.00], 2: [0.80, 0.47, 0.65], 3: [0.00, 0.62, 0.45] };
 
