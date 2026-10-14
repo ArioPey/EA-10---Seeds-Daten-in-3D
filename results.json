@@ -1,0 +1,650 @@
+[
+ {
+  "perplexity": 5,
+  "epsilon": 5,
+  "iterations": 250,
+  "silhouette": 0.3425941736132329,
+  "knn5": 0.9342857142857144,
+  "cost": 7.757685415739472,
+  "bestSil": 0.3506454545416117
+ },
+ {
+  "perplexity": 5,
+  "epsilon": 5,
+  "iterations": 500,
+  "silhouette": 0.41671884181929786,
+  "knn5": 0.9380952380952381,
+  "cost": 7.6247740336672205,
+  "bestSil": 0.43407900146582296
+ },
+ {
+  "perplexity": 5,
+  "epsilon": 5,
+  "iterations": 1000,
+  "silhouette": 0.451741727883369,
+  "knn5": 0.9380952380952381,
+  "cost": 7.596431235409722,
+  "bestSil": 0.46894970050878165
+ },
+ {
+  "perplexity": 5,
+  "epsilon": 5,
+  "iterations": 1500,
+  "silhouette": 0.46177259029505624,
+  "knn5": 0.9380952380952381,
+  "cost": 7.5878243551207705,
+  "bestSil": 0.47577385220830876
+ },
+ {
+  "perplexity": 5,
+  "epsilon": 10,
+  "iterations": 250,
+  "silhouette": 0.35548328283453456,
+  "knn5": 0.9371428571428572,
+  "cost": 7.712680526942269,
+  "bestSil": 0.37012535275736114
+ },
+ {
+  "perplexity": 5,
+  "epsilon": 10,
+  "iterations": 500,
+  "silhouette": 0.4275846430724736,
+  "knn5": 0.9380952380952381,
+  "cost": 7.6132726657964565,
+  "bestSil": 0.4399474828321273
+ },
+ {
+  "perplexity": 5,
+  "epsilon": 10,
+  "iterations": 1000,
+  "silhouette": 0.45620095274188993,
+  "knn5": 0.9380952380952381,
+  "cost": 7.591925291428547,
+  "bestSil": 0.472091318841476
+ },
+ {
+  "perplexity": 5,
+  "epsilon": 10,
+  "iterations": 1500,
+  "silhouette": 0.46541843171491787,
+  "knn5": 0.9380952380952381,
+  "cost": 7.5851317841070465,
+  "bestSil": 0.48198712793233656
+ },
+ {
+  "perplexity": 5,
+  "epsilon": 20,
+  "iterations": 250,
+  "silhouette": 0.37331450996000554,
+  "knn5": 0.9371428571428572,
+  "cost": 7.680425673623082,
+  "bestSil": 0.38974347873970355
+ },
+ {
+  "perplexity": 5,
+  "epsilon": 20,
+  "iterations": 500,
+  "silhouette": 0.44151839140121185,
+  "knn5": 0.9380952380952381,
+  "cost": 7.607671264121447,
+  "bestSil": 0.45991362275910447
+ },
+ {
+  "perplexity": 5,
+  "epsilon": 20,
+  "iterations": 1000,
+  "silhouette": 0.4612757068223482,
+  "knn5": 0.9380952380952381,
+  "cost": 7.591204488724412,
+  "bestSil": 0.4757266326553604
+ },
+ {
+  "perplexity": 5,
+  "epsilon": 20,
+  "iterations": 1500,
+  "silhouette": 0.4676008414302644,
+  "knn5": 0.9380952380952381,
+  "cost": 7.585432017394123,
+  "bestSil": 0.47869881394841884
+ },
+ {
+  "perplexity": 10,
+  "epsilon": 5,
+  "iterations": 250,
+  "silhouette": 0.41645317518478614,
+  "knn5": 0.9247619047619047,
+  "cost": 8.327021244558633,
+  "bestSil": 0.4345125127048862
+ },
+ {
+  "perplexity": 10,
+  "epsilon": 5,
+  "iterations": 500,
+  "silhouette": 0.47935593081929123,
+  "knn5": 0.9323809523809524,
+  "cost": 8.236431387951095,
+  "bestSil": 0.4884695427522315
+ },
+ {
+  "perplexity": 10,
+  "epsilon": 5,
+  "iterations": 1000,
+  "silhouette": 0.4961247026708381,
+  "knn5": 0.9323809523809524,
+  "cost": 8.2160640674073,
+  "bestSil": 0.5024850440312857
+ },
+ {
+  "perplexity": 10,
+  "epsilon": 5,
+  "iterations": 1500,
+  "silhouette": 0.5015875625968903,
+  "knn5": 0.9323809523809524,
+  "cost": 8.209729695071715,
+  "bestSil": 0.50721046188064
+ },
+ {
+  "perplexity": 10,
+  "epsilon": 10,
+  "iterations": 250,
+  "silhouette": 0.434175082660232,
+  "knn5": 0.9342857142857144,
+  "cost": 8.295454023186297,
+  "bestSil": 0.43815319288816773
+ },
+ {
+  "perplexity": 10,
+  "epsilon": 10,
+  "iterations": 500,
+  "silhouette": 0.4861028051032056,
+  "knn5": 0.9333333333333333,
+  "cost": 8.226971469781933,
+  "bestSil": 0.4898235822427831
+ },
+ {
+  "perplexity": 10,
+  "epsilon": 10,
+  "iterations": 1000,
+  "silhouette": 0.4985120383506537,
+  "knn5": 0.9342857142857144,
+  "cost": 8.211258513146648,
+  "bestSil": 0.5010584013696893
+ },
+ {
+  "perplexity": 10,
+  "epsilon": 10,
+  "iterations": 1500,
+  "silhouette": 0.5029805511814827,
+  "knn5": 0.9342857142857144,
+  "cost": 8.2063777053274,
+  "bestSil": 0.5052986780757374
+ },
+ {
+  "perplexity": 10,
+  "epsilon": 20,
+  "iterations": 250,
+  "silhouette": 0.454944526929315,
+  "knn5": 0.9333333333333333,
+  "cost": 8.270977000596165,
+  "bestSil": 0.4643735339226609
+ },
+ {
+  "perplexity": 10,
+  "epsilon": 20,
+  "iterations": 500,
+  "silhouette": 0.49283951149376914,
+  "knn5": 0.9323809523809524,
+  "cost": 8.221765107916992,
+  "bestSil": 0.49709433830816474
+ },
+ {
+  "perplexity": 10,
+  "epsilon": 20,
+  "iterations": 1000,
+  "silhouette": 0.503479264575253,
+  "knn5": 0.9333333333333333,
+  "cost": 8.209458607928287,
+  "bestSil": 0.5069880441008587
+ },
+ {
+  "perplexity": 10,
+  "epsilon": 20,
+  "iterations": 1500,
+  "silhouette": 0.5071383199240149,
+  "knn5": 0.9333333333333333,
+  "cost": 8.205589323001599,
+  "bestSil": 0.5109376736706656
+ },
+ {
+  "perplexity": 15,
+  "epsilon": 5,
+  "iterations": 250,
+  "silhouette": 0.4473745378463616,
+  "knn5": 0.9257142857142858,
+  "cost": 8.632867875898588,
+  "bestSil": 0.45092936918891174
+ },
+ {
+  "perplexity": 15,
+  "epsilon": 5,
+  "iterations": 500,
+  "silhouette": 0.4878957683865804,
+  "knn5": 0.9314285714285715,
+  "cost": 8.561123030824263,
+  "bestSil": 0.4902531864608637
+ },
+ {
+  "perplexity": 15,
+  "epsilon": 5,
+  "iterations": 1000,
+  "silhouette": 0.4991062632984014,
+  "knn5": 0.9295238095238096,
+  "cost": 8.54452738917509,
+  "bestSil": 0.5010253009276272
+ },
+ {
+  "perplexity": 15,
+  "epsilon": 5,
+  "iterations": 1500,
+  "silhouette": 0.5020941372661685,
+  "knn5": 0.9295238095238096,
+  "cost": 8.539901629155121,
+  "bestSil": 0.5040660613265164
+ },
+ {
+  "perplexity": 15,
+  "epsilon": 10,
+  "iterations": 250,
+  "silhouette": 0.4647900946058837,
+  "knn5": 0.9295238095238096,
+  "cost": 8.609187740623332,
+  "bestSil": 0.47055896768122857
+ },
+ {
+  "perplexity": 15,
+  "epsilon": 10,
+  "iterations": 500,
+  "silhouette": 0.4974597756061902,
+  "knn5": 0.9304761904761906,
+  "cost": 8.55462882596888,
+  "bestSil": 0.5026505062557345
+ },
+ {
+  "perplexity": 15,
+  "epsilon": 10,
+  "iterations": 1000,
+  "silhouette": 0.5044096485046354,
+  "knn5": 0.9295238095238096,
+  "cost": 8.542278807680969,
+  "bestSil": 0.5088298637590434
+ },
+ {
+  "perplexity": 15,
+  "epsilon": 10,
+  "iterations": 1500,
+  "silhouette": 0.5064218790032665,
+  "knn5": 0.9285714285714286,
+  "cost": 8.538885771042015,
+  "bestSil": 0.5098319373352516
+ },
+ {
+  "perplexity": 15,
+  "epsilon": 20,
+  "iterations": 250,
+  "silhouette": 0.47251743286251546,
+  "knn5": 0.9304761904761906,
+  "cost": 8.590248523577342,
+  "bestSil": 0.47309841078206627
+ },
+ {
+  "perplexity": 15,
+  "epsilon": 20,
+  "iterations": 500,
+  "silhouette": 0.4977452732305946,
+  "knn5": 0.9295238095238096,
+  "cost": 8.54886232917015,
+  "bestSil": 0.5007189935246813
+ },
+ {
+  "perplexity": 15,
+  "epsilon": 20,
+  "iterations": 1000,
+  "silhouette": 0.503330489605491,
+  "knn5": 0.9285714285714286,
+  "cost": 8.540042892732076,
+  "bestSil": 0.506732653146842
+ },
+ {
+  "perplexity": 15,
+  "epsilon": 20,
+  "iterations": 1500,
+  "silhouette": 0.5052737255598931,
+  "knn5": 0.9266666666666667,
+  "cost": 8.537653140883206,
+  "bestSil": 0.5085891643035366
+ },
+ {
+  "perplexity": 20,
+  "epsilon": 5,
+  "iterations": 250,
+  "silhouette": 0.4679124836134105,
+  "knn5": 0.9257142857142858,
+  "cost": 8.844460980189812,
+  "bestSil": 0.4753149728890678
+ },
+ {
+  "perplexity": 20,
+  "epsilon": 5,
+  "iterations": 500,
+  "silhouette": 0.49747951065704205,
+  "knn5": 0.9257142857142858,
+  "cost": 8.785101745537826,
+  "bestSil": 0.5040167576454765
+ },
+ {
+  "perplexity": 20,
+  "epsilon": 5,
+  "iterations": 1000,
+  "silhouette": 0.5032110529428907,
+  "knn5": 0.9209523809523809,
+  "cost": 8.773444552094409,
+  "bestSil": 0.509032839887367
+ },
+ {
+  "perplexity": 20,
+  "epsilon": 5,
+  "iterations": 1500,
+  "silhouette": 0.5045214068449834,
+  "knn5": 0.919047619047619,
+  "cost": 8.770274616617765,
+  "bestSil": 0.5083559533167186
+ },
+ {
+  "perplexity": 20,
+  "epsilon": 10,
+  "iterations": 250,
+  "silhouette": 0.4743817706283459,
+  "knn5": 0.9304761904761906,
+  "cost": 8.822399438405863,
+  "bestSil": 0.48125212338837
+ },
+ {
+  "perplexity": 20,
+  "epsilon": 10,
+  "iterations": 500,
+  "silhouette": 0.4996912716001603,
+  "knn5": 0.9209523809523809,
+  "cost": 8.778585044055523,
+  "bestSil": 0.5063176173078693
+ },
+ {
+  "perplexity": 20,
+  "epsilon": 10,
+  "iterations": 1000,
+  "silhouette": 0.5038574991689226,
+  "knn5": 0.9199999999999999,
+  "cost": 8.77010171632415,
+  "bestSil": 0.5090411048348404
+ },
+ {
+  "perplexity": 20,
+  "epsilon": 10,
+  "iterations": 1500,
+  "silhouette": 0.5050535848633789,
+  "knn5": 0.919047619047619,
+  "cost": 8.767863580504631,
+  "bestSil": 0.5098809525054729
+ },
+ {
+  "perplexity": 20,
+  "epsilon": 20,
+  "iterations": 250,
+  "silhouette": 0.4837519344726851,
+  "knn5": 0.9304761904761906,
+  "cost": 8.807638810904681,
+  "bestSil": 0.4889151805779305
+ },
+ {
+  "perplexity": 20,
+  "epsilon": 20,
+  "iterations": 500,
+  "silhouette": 0.5013935703078733,
+  "knn5": 0.919047619047619,
+  "cost": 8.776622040378571,
+  "bestSil": 0.508033243000937
+ },
+ {
+  "perplexity": 20,
+  "epsilon": 20,
+  "iterations": 1000,
+  "silhouette": 0.504247121672895,
+  "knn5": 0.9180952380952381,
+  "cost": 8.770833084815848,
+  "bestSil": 0.5090410459530276
+ },
+ {
+  "perplexity": 20,
+  "epsilon": 20,
+  "iterations": 1500,
+  "silhouette": 0.505505477048709,
+  "knn5": 0.9180952380952381,
+  "cost": 8.769231091066011,
+  "bestSil": 0.5113325721136737
+ },
+ {
+  "perplexity": 30,
+  "epsilon": 5,
+  "iterations": 250,
+  "silhouette": 0.4834505910494416,
+  "knn5": 0.9276190476190477,
+  "cost": 9.134588982185695,
+  "bestSil": 0.49039294572562
+ },
+ {
+  "perplexity": 30,
+  "epsilon": 5,
+  "iterations": 500,
+  "silhouette": 0.5035036125043748,
+  "knn5": 0.9247619047619049,
+  "cost": 9.096910799275218,
+  "bestSil": 0.5082974437133252
+ },
+ {
+  "perplexity": 30,
+  "epsilon": 5,
+  "iterations": 1000,
+  "silhouette": 0.5039168388945489,
+  "knn5": 0.9228571428571429,
+  "cost": 9.091431553963229,
+  "bestSil": 0.5079680224930726
+ },
+ {
+  "perplexity": 30,
+  "epsilon": 5,
+  "iterations": 1500,
+  "silhouette": 0.5039831726040951,
+  "knn5": 0.9180952380952381,
+  "cost": 9.089979741011499,
+  "bestSil": 0.5085203797325849
+ },
+ {
+  "perplexity": 30,
+  "epsilon": 10,
+  "iterations": 250,
+  "silhouette": 0.4927713944073336,
+  "knn5": 0.9228571428571429,
+  "cost": 9.120284399701408,
+  "bestSil": 0.49637860575151277
+ },
+ {
+  "perplexity": 30,
+  "epsilon": 10,
+  "iterations": 500,
+  "silhouette": 0.5050438345625222,
+  "knn5": 0.9238095238095239,
+  "cost": 9.094513523627281,
+  "bestSil": 0.5080891702689544
+ },
+ {
+  "perplexity": 30,
+  "epsilon": 10,
+  "iterations": 1000,
+  "silhouette": 0.504713697178812,
+  "knn5": 0.9199999999999999,
+  "cost": 9.090532600503478,
+  "bestSil": 0.5073616983868093
+ },
+ {
+  "perplexity": 30,
+  "epsilon": 10,
+  "iterations": 1500,
+  "silhouette": 0.5053047829660005,
+  "knn5": 0.917142857142857,
+  "cost": 9.089413999109476,
+  "bestSil": 0.5091343373227312
+ },
+ {
+  "perplexity": 30,
+  "epsilon": 20,
+  "iterations": 250,
+  "silhouette": 0.49748004118138367,
+  "knn5": 0.919047619047619,
+  "cost": 9.110591930616653,
+  "bestSil": 0.5027703623428409
+ },
+ {
+  "perplexity": 30,
+  "epsilon": 20,
+  "iterations": 500,
+  "silhouette": 0.5041793790654462,
+  "knn5": 0.9209523809523811,
+  "cost": 9.093454520943798,
+  "bestSil": 0.5081489571239802
+ },
+ {
+  "perplexity": 30,
+  "epsilon": 20,
+  "iterations": 1000,
+  "silhouette": 0.5043532325122009,
+  "knn5": 0.9161904761904761,
+  "cost": 9.090664020216952,
+  "bestSil": 0.5074944461479348
+ },
+ {
+  "perplexity": 30,
+  "epsilon": 20,
+  "iterations": 1500,
+  "silhouette": 0.5047064199366982,
+  "knn5": 0.9161904761904761,
+  "cost": 9.089877123295704,
+  "bestSil": 0.5090622502906267
+ },
+ {
+  "perplexity": 40,
+  "epsilon": 5,
+  "iterations": 250,
+  "silhouette": 0.4946692599504462,
+  "knn5": 0.917142857142857,
+  "cost": 9.338122036186125,
+  "bestSil": 0.5009279057255319
+ },
+ {
+  "perplexity": 40,
+  "epsilon": 5,
+  "iterations": 500,
+  "silhouette": 0.5018445089538247,
+  "knn5": 0.9161904761904761,
+  "cost": 9.317771470235247,
+  "bestSil": 0.5069594047030084
+ },
+ {
+  "perplexity": 40,
+  "epsilon": 5,
+  "iterations": 1000,
+  "silhouette": 0.5002599611026449,
+  "knn5": 0.9161904761904761,
+  "cost": 9.315932062916525,
+  "bestSil": 0.5054131217383974
+ },
+ {
+  "perplexity": 40,
+  "epsilon": 5,
+  "iterations": 1500,
+  "silhouette": 0.4993202103544835,
+  "knn5": 0.917142857142857,
+  "cost": 9.315662353012012,
+  "bestSil": 0.5044746581620664
+ },
+ {
+  "perplexity": 40,
+  "epsilon": 10,
+  "iterations": 250,
+  "silhouette": 0.4980357264762644,
+  "knn5": 0.9133333333333333,
+  "cost": 9.32749580303244,
+  "bestSil": 0.503151796950643
+ },
+ {
+  "perplexity": 40,
+  "epsilon": 10,
+  "iterations": 500,
+  "silhouette": 0.5008316686229073,
+  "knn5": 0.917142857142857,
+  "cost": 9.314835301544207,
+  "bestSil": 0.5064116748218602
+ },
+ {
+  "perplexity": 40,
+  "epsilon": 10,
+  "iterations": 1000,
+  "silhouette": 0.498797894099473,
+  "knn5": 0.917142857142857,
+  "cost": 9.313819132666717,
+  "bestSil": 0.5046102580198428
+ },
+ {
+  "perplexity": 40,
+  "epsilon": 10,
+  "iterations": 1500,
+  "silhouette": 0.4979105626639521,
+  "knn5": 0.917142857142857,
+  "cost": 9.313681473169137,
+  "bestSil": 0.5039006205287827
+ },
+ {
+  "perplexity": 40,
+  "epsilon": 20,
+  "iterations": 250,
+  "silhouette": 0.5049044695673909,
+  "knn5": 0.9133333333333333,
+  "cost": 9.32787353434637,
+  "bestSil": 0.5147472241161974
+ },
+ {
+  "perplexity": 40,
+  "epsilon": 20,
+  "iterations": 500,
+  "silhouette": 0.5012678794141934,
+  "knn5": 0.9161904761904761,
+  "cost": 9.316178681276757,
+  "bestSil": 0.5057993455618008
+ },
+ {
+  "perplexity": 40,
+  "epsilon": 20,
+  "iterations": 1000,
+  "silhouette": 0.4994976625205725,
+  "knn5": 0.917142857142857,
+  "cost": 9.315612821076577,
+  "bestSil": 0.5042696209879305
+ },
+ {
+  "perplexity": 40,
+  "epsilon": 20,
+  "iterations": 1500,
+  "silhouette": 0.4988589644376984,
+  "knn5": 0.917142857142857,
+  "cost": 9.31554495157179,
+  "bestSil": 0.5037763167969113
+ }
+]

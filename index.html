@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seeds Daten in 3D</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <h1>Seeds-Daten in 3D</h1>
+  <p>Der Seeds-Datensatz (210 Weizenkörner, 7 Messwerte, 3 Sorten) wird mit t-SNE von 7 auf 3 Dimensionen reduziert und als drehbare Punktwolke dargestellt. Beim Start ist meine beste gespeicherte Lösung geladen. Mit Restart und Step lässt sich der Algorithmus selbst ablaufen.</p>
+</header>
+
+<main>
+  <section>
+    <div class="canvas-wrap">
+      <canvas id="gl" tabindex="0" aria-label="3D-Punktwolke der t-SNE-Einbettung der Seeds-Daten"></canvas>
+      <div class="hud" aria-live="polite">
+        <div>Step-Count</div>
+        <div class="big" id="step-count">0</div>
+        <div class="small">Kosten (KL): <span id="cost">–</span></div>
+        <div class="small">Stand: <span id="source">lädt …</span></div>
+      </div>
+      <ul class="legend" id="legend" aria-label="Legende"></ul>
+      <p id="error" class="error" hidden></p>
+    </div>
+    <div class="switch" role="group" aria-label="t-SNE steuern">
+      <button id="btn-restart" type="button" class="primary">Restart (R)</button>
+      <button id="btn-step" type="button">Step (T)</button>
+      <button id="btn-step10" type="button">Step10 (Shift+T)</button>
+      <button id="btn-cam" type="button">Kamera zurücksetzen (C)</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Bedienung</h2>
+    <table>
+      <thead><tr><th>Eingabe</th><th>Wirkung</th></tr></thead>
+      <tbody>
+        <tr><td><kbd>R</kbd> oder Button „Restart“</td><td>t-SNE beginnt von vorne (Step 0) auf den Originaldaten, mit neuen Zufallszahlen und damit einem anderen Ergebnis als die gespeicherte Lösung.</td></tr>
+        <tr><td><kbd>t</kbd> oder Button „Step“</td><td>Ein Iterationsschritt. Gedrückt halten wiederholt die Schritte.</td></tr>
+        <tr><td><kbd>T</kbd> (Shift+t) oder Button „Step10“</td><td>10 Iterationsschritte auf einmal.</td></tr>
+        <tr><td><kbd>←</kbd> <kbd>→</kbd> oder <kbd>A</kbd> <kbd>D</kbd></td><td>Kamera um die Punktwolke nach links bzw. rechts schwenken.</td></tr>
+        <tr><td><kbd>↑</kbd> <kbd>↓</kbd> oder <kbd>W</kbd> <kbd>S</kbd></td><td>Kamera nach oben bzw. unten schwenken.</td></tr>
+        <tr><td><kbd>E</kbd> / <kbd>+</kbd> und <kbd>Q</kbd> / <kbd>-</kbd></td><td>Heran- bzw. wegzoomen.</td></tr>
+        <tr><td>Maus ziehen / Mausrad</td><td>Kamera drehen bzw. zoomen.</td></tr>
+        <tr><td><kbd>C</kbd></td><td>Kamera zurücksetzen.</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Die Navigation (Schwenken und Zoomen um die Mitte der Wolke) habe ich nach dem üblichen Muster aus der Lerneinheit NAV umgesetzt. Die Punktwolke wird in jedem Bild auf den Radius 1 normiert, weil die t-SNE-Werte zu Beginn winzig sind und mit den Iterationen wachsen. Die Würfellinien dienen nur der Orientierung.</p>
+    <p class="note">Wenn man nach dem Laden direkt „Step“ drückt, setzt t-SNE von der gespeicherten Lösung aus fort (Zähler läuft ab dem gespeicherten Stand weiter). Dabei werden Momentum und Schrittweiten neu gestartet, die Wolke bewegt sich deshalb nur leicht. Mit „Restart“ beginnt dagegen ein komplett neuer Lauf bei Step 0.</p>
+  </section>
+
+  <section>
+    <h2>Daten</h2>
+    <ul>
+      <li><strong>Datensatz:</strong> Seeds (UCI Machine Learning Repository): 210 Weizenkörner der Sorten Kama (Klasse 1), Rosa (Klasse 2) und Canadian (Klasse 3), je 70 Stück.</li>
+      <li><strong>Merkmale (7):</strong> Fläche, Umfang, Kompaktheit, Kernlänge, Kernbreite, Asymmetriekoeffizient, Länge der Furche. Gemessen per Röntgenaufnahme, siehe Charytanowicz et al. (DOI unten).</li>
+      <li><strong>Datei:</strong> <code>data/seeds.csv</code> (7 Merkmale, Klasse, mit Kopfzeile). Beim Laden wird sie mit <code>fetch</code> gelesen und per <code>split</code> in Zahlen zerlegt.</li>
+      <li><strong>Vorverarbeitung:</strong> z-Standardisierung jedes Merkmals (Mittelwert 0, Standardabweichung 1), da sich die Wertebereiche stark unterscheiden und sonst Fläche und Umfang die Abstände dominieren. Die Klasse geht nicht in t-SNE ein, sie dient nur zur Einfärbung.</li>
+    </ul>
+
+    <h2>t-SNE-Einstellungen der gespeicherten Lösung</h2>
+    <table>
+      <tbody>
+        <tr><th scope="row">Ausgabedimensionen</th><td>3</td></tr>
+        <tr><th scope="row">Perplexity</th><td id="p-perp">–</td></tr>
+        <tr><th scope="row">Lernrate (epsilon)</th><td id="p-eps">–</td></tr>
+        <tr><th scope="row">Iterationen</th><td id="p-iter">–</td></tr>
+        <tr><th scope="row">Zufallsstart (Seed)</th><td id="p-seed">–</td></tr>
+        <tr><th scope="row">Silhouette-Koeffizient (Klassen, 3D)</th><td id="p-sil">–</td></tr>
+        <tr><th scope="row">5-NN-Genauigkeit (3D)</th><td id="p-knn">–</td></tr>
+        <tr><th scope="row">Weitere Parameter</th><td>Standardwerte von tSNEJS: Early Exaggeration ×4 in den ersten 100 Iterationen, Momentum 0.5 und ab Iteration 250 dann 0.8, adaptive Schrittweiten (gains).</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Die Werte werden aus den Kommentarzeilen am Anfang von <code>data/seeds_tsne3d.csv</code> gelesen. „Restart“ und „Step“ verwenden dieselbe Perplexity und Lernrate.</p>
+
+    <h3>Wie die Parameter gefunden wurden</h3>
+    <p>Das Skript <code>tools/optimize.js</code> (Node.js) lässt dieselbe <code>tsne.js</code> wie die Webseite mit verschiedenen Einstellungen laufen. Es ersetzt <code>Math.random</code> durch einen Zufallsgenerator mit festem Startwert, damit jeder Lauf reproduzierbar ist. Jede Kombination aus Perplexity und Lernrate lief mit 5 verschiedenen Startwerten bis 1500 Iterationen. Nach 250, 500, 1000 und 1500 Iterationen wurde die Trennung der drei Klassen im 3D-Raum gemessen:</p>
+    <ul>
+      <li><strong>Silhouette-Koeffizient</strong> mit den Sortenlabels: Maß dafür, wie viel näher ein Korn den Körnern der eigenen Sorte liegt als denen der nächsten fremden Sorte. Bei 1 perfekt getrennt, bei 0 überlappend.</li>
+      <li><strong>5-NN-Genauigkeit</strong> (Leave-one-out): Anteil der Körner, bei denen die Mehrheit der 5 nächsten Nachbarn in der 3D-Darstellung dieselbe Sorte hat.</li>
+    </ul>
+    <p>Die Tabelle zeigt den Mittelwert des Silhouette-Koeffizienten über die 5 Startwerte. Die beste Einzelkonfiguration ist hervorgehoben, ihr Lauf wurde in <code>data/seeds_tsne3d.csv</code> gespeichert.</p>
+    <div class="table-scroll">
+      <table>
+        <caption class="note" style="text-align:left;caption-side:top;padding-bottom:6px">Mittlerer Silhouette-Koeffizient über 5 Startwerte (höher = besser getrennt)</caption>
+        <thead>
+          <tr><th rowspan="2">Perplexity</th><th class="num" colspan="3">nach 1500 Iterationen, Lernrate ε =</th><th class="num" colspan="3">ε = 20, nach … Iterationen</th><th class="num" rowspan="2">5-NN-Genauigkeit<br>(ε = 20, 1500)</th></tr>
+          <tr><th class="num">5</th><th class="num">10</th><th class="num">20</th><th class="num">250</th><th class="num">500</th><th class="num">1000</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>5</td><td class="num">0.462</td><td class="num">0.465</td><td class="num">0.468</td><td class="num">0.373</td><td class="num">0.442</td><td class="num">0.461</td><td class="num">93.8 %</td></tr>
+          <tr><td>10</td><td class="num">0.502</td><td class="num">0.503</td><td class="num">0.507</td><td class="num">0.455</td><td class="num">0.493</td><td class="num">0.503</td><td class="num">93.3 %</td></tr>
+          <tr><td>15</td><td class="num">0.502</td><td class="num">0.506</td><td class="num">0.505</td><td class="num">0.473</td><td class="num">0.498</td><td class="num">0.503</td><td class="num">92.7 %</td></tr>
+          <tr class="best"><td>20</td><td class="num">0.505</td><td class="num">0.505</td><td class="num">0.506</td><td class="num">0.484</td><td class="num">0.501</td><td class="num">0.504</td><td class="num">91.8 %</td></tr>
+          <tr><td>30</td><td class="num">0.504</td><td class="num">0.505</td><td class="num">0.505</td><td class="num">0.497</td><td class="num">0.504</td><td class="num">0.504</td><td class="num">91.6 %</td></tr>
+          <tr><td>40</td><td class="num">0.499</td><td class="num">0.498</td><td class="num">0.499</td><td class="num">0.505</td><td class="num">0.501</td><td class="num">0.499</td><td class="num">91.7 %</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Die Trennung wächst mit der Perplexity zunächst deutlich (von 5 auf 15 bis 30) und bleibt dann auf einem Plateau um 0,50. Eine kleine Perplexity betont sehr lokale Nachbarschaften, dadurch sind die Sorten schlechter zusammenhängend. Bei Perplexity 40 sinkt der Wert nach 1500 Iterationen wieder leicht. Die Lernrate hat nach 1000 bis 1500 Iterationen kaum noch Einfluss, eine größere Lernrate (ε = 20) erreicht das Plateau aber früher als ε = 5. Nach 250 Iterationen ist t-SNE noch nicht eingeschwungen. Ab etwa 1000 Iterationen ändert sich die Trennung kaum noch. Die gespeicherte Lösung ist deshalb nur aus Läufen mit mindestens 1000 Iterationen gewählt: <strong>Perplexity 20, ε = 20, 1500 Iterationen</strong>. Die Unterschiede zwischen den Konfigurationen auf dem Plateau sind klein, der Zufallsstart wirkt sich ähnlich stark aus. Deshalb ist die Speicherung des besten Laufs sinnvoll. In der gespeicherten Lösung (5-NN-Auswertung) wird kein Rosa-Korn als Canadian eingeordnet und umgekehrt. Verwechslungen gibt es nur mit der mittleren Sorte Kama (7 von 70 Kama-Körnern werden einer anderen Sorte zugeordnet, 4 Rosa- und 6 Canadian-Körner der Sorte Kama). Ein Silhouette-Koeffizient von etwa 0,5 bedeutet eine gut erkennbare, aber nicht perfekte Trennung.</p>
+
+    <h2>Mathematischer Hintergrund von t-SNE</h2>
+    <p>t-SNE (t-distributed Stochastic Neighbor Embedding, van der Maaten und Hinton 2008) sucht für jeden Datenpunkt <var>x<sub>i</sub></var> im 7-dimensionalen Raum einen Punkt <var>y<sub>i</sub></var> im 3-dimensionalen Raum, sodass Nachbarschaften erhalten bleiben.</p>
+    <h3>1. Ähnlichkeiten im Hochdimensionalen</h3>
+    <p>Für jeden Punkt <var>i</var> wird die Wahrscheinlichkeit bestimmt, dass er den Punkt <var>j</var> als Nachbarn wählt, mit einer Gauß-Kurve um <var>x<sub>i</sub></var>:</p>
+    <div class="formula">p<sub>j|i</sub> = exp(−‖x<sub>i</sub> − x<sub>j</sub>‖² / 2σ<sub>i</sub>²) / Σ<sub>k≠i</sub> exp(−‖x<sub>i</sub> − x<sub>k</sub>‖² / 2σ<sub>i</sub>²)</div>
+    <p>Die Breite <var>σ<sub>i</sub></var> wird per Binärsuche so gewählt, dass die Perplexity <var>Perp(P<sub>i</sub>) = 2<sup>H(P<sub>i</sub>)</sup></var> (mit der Shannon-Entropie <var>H</var>) dem vorgegebenen Wert entspricht. Die Perplexity ist damit die „effektive Anzahl der Nachbarn“. Dichte Regionen bekommen ein kleines <var>σ<sub>i</sub></var>, dünne Regionen ein großes. Anschließend wird symmetrisiert:</p>
+    <div class="formula">p<sub>ij</sub> = (p<sub>j|i</sub> + p<sub>i|j</sub>) / 2N</div>
+    <h3>2. Ähnlichkeiten im Niedrigdimensionalen</h3>
+    <p>Im 3D-Raum wird statt der Gauß-Kurve eine Student-t-Verteilung mit einem Freiheitsgrad verwendet:</p>
+    <div class="formula">q<sub>ij</sub> = (1 + ‖y<sub>i</sub> − y<sub>j</sub>‖²)<sup>−1</sup> / Σ<sub>k≠l</sub> (1 + ‖y<sub>k</sub> − y<sub>l</sub>‖²)<sup>−1</sup></div>
+    <p>Ihre langen Ränder erlauben es, mittlere Distanzen im niedrigdimensionalen Raum größer zu machen. Das löst das „Crowding-Problem“ des Vorgängers SNE: In wenigen Dimensionen ist nicht genug Platz, um alle mäßig entfernten Punkte in der richtigen Distanz zu halten. Cluster rücken sichtbar auseinander.</p>
+    <h3>3. Kostenfunktion und Gradient</h3>
+    <p>Die Abweichung zwischen <var>P</var> und <var>Q</var> wird mit der Kullback-Leibler-Divergenz gemessen. Diese Kosten zeigt die Anwendung als „Kosten (KL)“ an:</p>
+    <div class="formula">C = KL(P‖Q) = Σ<sub>i≠j</sub> p<sub>ij</sub> · log(p<sub>ij</sub> / q<sub>ij</sub>)</div>
+    <div class="formula">∂C/∂y<sub>i</sub> = 4 Σ<sub>j</sub> (p<sub>ij</sub> − q<sub>ij</sub>) (y<sub>i</sub> − y<sub>j</sub>) (1 + ‖y<sub>i</sub> − y<sub>j</sub>‖²)<sup>−1</sup></div>
+    <p>Nahe Nachbarn (großes <var>p<sub>ij</sub></var>), die im 3D-Raum zu weit auseinanderliegen, werden angezogen. Punkte, die im 3D-Raum zu nah sind (großes <var>q<sub>ij</sub></var>, kleines <var>p<sub>ij</sub></var>), werden abgestoßen.</p>
+    <h3>4. Optimierung</h3>
+    <p>Die Punkte <var>y<sub>i</sub></var> starten als kleines Gauß-Rauschen (Standardabweichung 10<sup>−4</sup>). Ein Gradientenabstieg mit Lernrate ε (epsilon), Momentum und adaptiven Schrittweiten verbessert sie Schritt für Schritt. In den ersten 100 Iterationen werden alle <var>p<sub>ij</sub></var> mit 4 multipliziert („Early Exaggeration“), damit sich Cluster zuerst grob bilden und nicht in lokalen Minima hängen bleiben. Wegen des zufälligen Starts ist das Ergebnis bei jedem Restart ein anderes lokales Minimum, daher die gespeicherte Lösung.</p>
+    <h3>Wirkung der Parameter</h3>
+    <ul>
+      <li><strong>Perplexity:</strong> Kleine Werte betonen sehr lokale Struktur, Cluster zerfallen leicht in Teilgruppen. Große Werte betonen die globale Struktur, Cluster rücken zusammen. Üblich sind Werte zwischen 5 und 50, sie muss deutlich kleiner als die Punktzahl (210) sein.</li>
+      <li><strong>Lernrate ε:</strong> Zu klein führt zu sehr langsamer Konvergenz. Zu groß führt zu unruhigen oder instabilen Verläufen.</li>
+      <li><strong>Iterationen:</strong> Zu wenige Schritte lassen die Wolke unfertig, nach genügend Schritten ändern sich die Kosten kaum noch. Der Step-Count in der Anwendung macht das sichtbar.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Umsetzung und Dateien</h2>
+    <ul>
+      <li><code>index.html</code>, <code>style.css</code>, <code>main.js</code>: Anwendung (WebGL ohne weitere Bibliothek, Punkte als beleuchtete Kugel-Sprites).</li>
+      <li><code>tsne.js</code>: tSNEJS von Andrej Karpathy, unverändert eingebunden. Die Dimension wird mit <code>dim: 3</code> eingestellt.</li>
+      <li><code>data/seeds.csv</code>: Originaldaten. <code>data/seeds_tsne3d.csv</code>: gespeicherte 3D-Lösung (Spalten x, y, z, class, dazu Metadaten als Kommentarzeilen).</li>
+      <li><code>tools/optimize.js</code>: Parametersuche und Erzeugung der gespeicherten Lösung (<code>node tools/optimize.js</code>). <code>tools/results.json</code>: Ergebnisse aller Läufe.</li>
+    </ul>
+
+    <h2>Test und QA</h2>
+    <ul>
+      <li>Getestet werden sollte: Seite laden (gespeicherte Lösung sichtbar, Step-Count = gespeicherte Iterationszahl), Restart, Step und Step10 mehrfach, Kamera mit Pfeiltasten, WASD, Maus und Mausrad, Fenstergröße ändern.</li>
+      <li>Lade- und Formatfehler der CSV-Dateien sowie Shader-Fehler werden in der Konsole ausgegeben und über der Szene angezeigt.</li>
+      <li>Lokal die Seite über einen Webserver öffnen (<code>python3 -m http.server</code>), da Browser <code>fetch</code> auf <code>file://</code> blockieren.</li>
+    </ul>
+
+    <h2>Quellen</h2>
+    <ul>
+      <li><a href="https://archive.ics.uci.edu/ml/datasets/seeds">UCI Machine Learning Repository: Seeds Data Set</a></li>
+      <li>M. Charytanowicz, J. Niewczas, P. Kulczycki, P. A. Kowalski, S. Łukasik, S. Żak: <em>Complete Gradient Clustering Algorithm for Features Analysis of X-ray Images</em>, in: Information Technologies in Biomedicine, Springer 2010. <a href="https://doi.org/10.1007/978-3-642-13105-9_2">DOI 10.1007/978-3-642-13105-9_2</a></li>
+      <li>L. van der Maaten, G. Hinton: <em>Visualizing Data using t-SNE</em>, Journal of Machine Learning Research 9 (2008), 2579–2605.</li>
+      <li><a href="https://github.com/karpathy/tsnejs">tSNEJS von Andrej Karpathy (GitHub)</a></li>
+      <li>Lerneinheiten DAT, NAV und DIM.</li>
+    </ul>
+    <p class="note">Die CSV-Datei <code>data/seeds.csv</code> stammt aus einer öffentlichen Kopie der UCI-Daten (<code>wheat-seeds.csv</code> im GitHub-Repository „jbrownlee/Datasets“) und wurde nur um eine Kopfzeile ergänzt. Die Werte entsprechen dem UCI-Datensatz. Selbst erstellt sind die Anwendung, die Parametersuche und die gespeicherte t-SNE-Lösung.</p>
+  </section>
+</main>
+
+<footer>Seeds Daten in 3D · t-SNE · WebGL</footer>
+<script src="tsne.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
